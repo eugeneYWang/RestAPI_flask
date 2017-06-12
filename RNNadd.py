@@ -5,8 +5,8 @@ import copy
 
 app = Flask(__name__)
 
-// resource name is RNNaddition. Used to be a noun.
-// Method POST.
+# resource name is RNNaddition. Used to be a noun.
+# Method POST.
 @app.route('/RNNaddition', methods = ['POST'])
 def calculate():
     num1 = request.args.get('number1')
