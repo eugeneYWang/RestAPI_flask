@@ -136,7 +136,9 @@ $ sudo pip install supervisor
 
 ```
 $ mkdir ~/.virtualenvs 
-$ cd ~/.virtualenvs$ virtualenv flaskdeploy  //create a virtual environment$ source ~/.virtualenvs/flaskdeploy/bin/activate 
+$ cd ~/.virtualenvs
+$ virtualenv flaskdeploy  //create a virtual environment
+$ source ~/.virtualenvs/flaskdeploy/bin/activate 
 ```
 
 - Next step is to get test code from GitHub by cloning the repository and installing the necessary packages via git with our virtual environment activated (which we just did).
@@ -144,8 +146,11 @@ $ cd ~/.virtualenvs$ virtualenv flaskdeploy  //create a virtual environment$ s
 	Again, this ```(flaskdeploy)``` indicates whatever command entered in the same line with it will be executed with this individual python environment using packages available in this environment.
 
 ```
-(flaskdeploy)$ mkdir ~/sites && cd ~/sites(flaskdeploy)$ git clone https://github.com/alexandersimoes/flaskdeploy.git(flaskdeploy)$ cd flaskdeploy
-(flaskdeploy)$ pip install -r requirements.txt```
+(flaskdeploy)$ mkdir ~/sites && cd ~/sites
+(flaskdeploy)$ git clone https://github.com/alexandersimoes/flaskdeploy.git
+(flaskdeploy)$ cd flaskdeploy
+(flaskdeploy)$ pip install -r requirements.txt
+```
 ### Install and configure Nginx
 
 For our next trick we’ll be configuring Nginx to work with our setup. We use Nginx as our routing manager, serving static files and reverse proxying to Gunicorn for our Flask views.
@@ -420,7 +425,7 @@ $ ps aux| grep python
 
 If you are following this documentation exactly, we only monitored a flask application with supervisor. What you have should be similar to this.
 
-![](https://lh4.googleusercontent.com/otE9qVcVM827ftgM6MDBlczBpC-Z3xoprYHwGG1zRVEWJcYMZuApbRrGHBkKbjRfOQcoPtdk1n1pMI4=w2560-h1386)
+![](https://sites.google.com/site/eugenekmlwebmap/whatever/pythonprocess.png?attredirects=0&d=1)
 
 To kill the supervisor process and the application.
 
@@ -478,7 +483,8 @@ The permission error stems from access permissions to supervisord’s socket fil
 
 ```
 ec2-user$ sudo su -        // log in root
-root$ groupadd supervisor   // this supervisor is the new grouproot$ usermod -a -G supervisor <myusername>
+root$ groupadd supervisor   // this supervisor is the new group
+root$ usermod -a -G supervisor <myusername>
 ```
 
 - After logging-out/logging-in (so that the new group membership takes effect), edit the supervisord configuration file to make the ```unix_http_server``` section look as following content.
@@ -488,7 +494,10 @@ ec2-user$ sudo nano /etc/supervisord.conf
 ```
 
 ```
-[unix_http_server]file=/tmp/supervisor.sock   ; (the path to the socket file)chmod=0770                       ; socket file mode (default 0700)chown=root:supervisor
+[unix_http_server]
+file=/tmp/supervisor.sock   ; (the path to the socket file)
+chmod=0770                       ; socket file mode (default 0700)
+chown=root:supervisor
 ```
 - Save the conf file and restart supervisord service.
 
@@ -523,8 +532,11 @@ $ mkdir ~/flask_api_ec2
 $ cd ~/flask_api_ec2
 $ git init
 $ echo "# flask_api_ec2" >> README.md
-$ git add README.md$ git commit -m "first commit"$ git remote add origin https://github.com/(yourgithubaccount)/(your_github_repo).git     
-//replace the content inside the services $ git push -u origin master
+$ git add README.md
+$ git commit -m "first commit"
+$ git remote add origin https://github.com/(yourgithubaccount)/(your_github_repo).git     
+//replace the content inside the services 
+$ git push -u origin master
 
 ```
 
